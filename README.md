@@ -42,3 +42,4 @@ Then open:
 - Server keeps limited response caching to improve repeated-query speed consistency.
 - Jaws defaults to a 94/100 quality target (`JAWS_QUALITY_TARGET`) and returns this target in API responses.
 - No proprietary UI/assets were copied; this is an original implementation.
+
