@@ -21,14 +21,6 @@ function setStatus(text) {
   statusNode.textContent = text;
 }
 
-function safeJsonParse(text) {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return null;
-  }
-}
-
 function appendMessage(role, text) {
   const node = document.createElement('article');
   node.className = `msg ${role}`;
@@ -62,12 +54,7 @@ async function sendToModel(message) {
     body: JSON.stringify({ message, history, mode, thinkLevel, profile, sessionId }),
   });
 
-  const raw = await response.text();
-  const payload = safeJsonParse(raw);
-  if (!payload) {
-    const snippet = raw.replace(/\s+/g, ' ').slice(0, 140);
-    throw new Error(`Server returned non-JSON response (status ${response.status}): ${snippet}`);
-  }
+  const payload = await response.json();
   if (!response.ok) {
     throw new Error(payload?.error || 'Request failed');
   }

@@ -43,6 +43,3 @@ Then open:
 - Jaws defaults to a 94/100 quality target (`JAWS_QUALITY_TARGET`) and returns this target in API responses.
 - No proprietary UI/assets were copied; this is an original implementation.
 
-## Troubleshooting
-
-- If you see `Unexpected token '<' ... is not valid JSON`, the upstream provider likely returned HTML (often from a bad `OPENAI_BASE_URL`, proxy, or auth issue). Jaws now surfaces this as a readable server/client error with status and response snippet.

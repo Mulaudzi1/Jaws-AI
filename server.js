@@ -47,14 +47,6 @@ function parseBody(req) {
   });
 }
 
-function safeJsonParse(text) {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return null;
-  }
-}
-
 async function serveStatic(pathname, res) {
   const safePath = pathname === '/' ? '/index.html' : pathname;
   const filePath = join(process.cwd(), safePath.replace(/^\/+/, ''));
@@ -118,12 +110,7 @@ async function callModel(messages, { temperature = 0.4, model = MODEL } = {}) {
   });
   clearTimeout(timeout);
 
-  const raw = await response.text();
-  const payload = safeJsonParse(raw);
-  if (!payload) {
-    const snippet = raw.replace(/\s+/g, ' ').slice(0, 180);
-    throw new Error(`Upstream model returned non-JSON (status ${response.status}): ${snippet}`);
-  }
+  const payload = await response.json();
   if (!response.ok) {
     const detail = payload?.error?.message || 'Model request failed';
     throw new Error(detail);
