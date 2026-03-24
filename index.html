@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jaws AI — fully functional modal chat connected to a real model API." />
+    <title>Jaws AI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <h1>Jaws AI</h1>
+      <p>Production-ready modal assistant with real model inference support.</p>
+      <button id="openModal" class="btn btn-primary">Launch Jaws</button>
+    </main>
+
+    <div id="jawsModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="overlay" data-close="true"></div>
+      <section class="dialog" role="document" tabindex="-1">
+        <header class="dialog-head">
+          <div>
+            <p class="eyebrow">Live AI Assistant</p>
+            <h2 id="modalTitle">Jaws</h2>
+            <p class="eyebrow">Target quality: 94/100 overall</p>
+          </div>
+          <button class="btn btn-icon" data-close="true" aria-label="Close">×</button>
+        </header>
+
+        <section id="chatWindow" class="chat-window" aria-live="polite" aria-label="Conversation">
+          <article class="msg assistant">
+            <p>
+              Hello — I am Jaws. Ask me anything about coding, analysis, strategy, or writing and I’ll respond using the connected model.
+            </p>
+          </article>
+        </section>
+
+        <form id="chatForm" class="composer" autocomplete="off">
+          <label for="prompt" class="sr-only">Prompt</label>
+          <textarea id="prompt" rows="3" placeholder="Ask Jaws anything..." required></textarea>
+          <label class="toggle">
+            <input id="ultraThink" type="checkbox" />
+            <span>UltraThink mode (deeper multi-pass reasoning)</span>
+          </label>
+          <label class="toggle">
+            <span>UltraThink intensity</span>
+            <select id="thinkLevel" aria-label="UltraThink intensity">
+              <option value="1">1x</option>
+              <option value="2" selected>2x</option>
+              <option value="3">3x</option>
+              <option value="4">4x</option>
+              <option value="5">5x</option>
+            </select>
+          </label>
+          <label class="toggle">
+            <span>Performance profile</span>
+            <select id="profile" aria-label="Performance profile">
+              <option value="fast">Fast</option>
+              <option value="balanced" selected>Balanced</option>
+              <option value="deep">Deep</option>
+            </select>
+          </label>
+          <div class="composer-footer">
+            <small id="status">Ready</small>
+            <button id="sendBtn" class="btn btn-primary" type="submit">Send</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
